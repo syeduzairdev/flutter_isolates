@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
-
-import 'home_page.dart';
+import 'package:isolates_demo/providers/data_providers.dart';
+import 'package:isolates_demo/screens/first_screen.dart';
+import 'package:isolates_demo/services/service_locatror.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  setupServiceLocator();
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (ctx) => DataProvider()),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -17,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: const FirstScreen(),
     );
   }
 }

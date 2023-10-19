@@ -1,0 +1,25 @@
+final userData = [
+  {"name": "John Doe", "age": 30, "email": "johndoe@example.com"},
+  {"name": "Jane Smith", "age": 25, "email": "janesmith@example.com"},
+  {"name": "Michael Johnson", "age": 28, "email": "michaeljohnson@example.com"},
+  {"name": "Emily Williams", "age": 32, "email": "emilywilliams@example.com"},
+  {"name": "Daniel Brown", "age": 35, "email": "danielbrown@example.com"},
+  {"name": "Olivia Jones", "age": 27, "email": "oliviajones@example.com"},
+  {"name": "William Garcia", "age": 31, "email": "williamgarcia@example.com"},
+  {"name": "Sophia Martinez", "age": 29, "email": "sophiamartinez@example.com"},
+  {"name": "Alex Miller", "age": 33, "email": "alexmiller@example.com"},
+  {"name": "Isabella Davis", "age": 26, "email": "isabelladavis@example.com"},
+  {"name": "David Rodriguez", "age": 34, "email": "davidrodriguez@example.com"},
+  {"name": "Mia Martinez", "age": 30, "email": "miamartinez@example.com"},
+  {
+    "name": "Joseph Hernandez",
+    "age": 29,
+    "email": "josephhernandez@example.com"
+  },
+  {"name": "Abigail Smith", "age": 31, "email": "abigailsmith@example.com"},
+  {"name": "James Johnson", "age": 28, "email": "jamesjohnson@example.com"},
+  {"name": "Elizabeth Brown", "age": 32, "email": "elizabethbrown@example.com"},
+  {"name": "Andrew Jones", "age": 27, "email": "andrewjones@example.com"},
+  {"name": "Evelyn Garcia", "age": 33, "email": "evelyngarcia@example.com"},
+  {"name": "Daniel Martinez", "age": 25, "email": "danielmartinez@example.com"},
+];
