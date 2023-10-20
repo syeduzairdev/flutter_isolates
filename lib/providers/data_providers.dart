@@ -7,131 +7,68 @@ import 'package:isolates_demo/services/service_locatror.dart';
 class DataProvider extends ChangeNotifier {
   final ApiServices _apiService = serviceLocator<ApiServices>();
 
-  //user data loading getter and setter
-  List<PersonModel> userDataList = [];
-  List<PersonModel> get getUserDataList => userDataList;
-  set setUserDataList(List<PersonModel> userDataList) {
-    this.userDataList = userDataList;
+  //user data  getter and setter
+  List<PersonModel> _userDataList = [];
+  List<PersonModel> get userDataList => _userDataList;
+  set userDataList(List<PersonModel> value) {
+    _userDataList = value;
     notifyListeners();
   }
 
-  bool isUserDataLoaded = false;
-  bool get getIsUserDataLoaded => isUserDataLoaded;
-  set setIsUserDataLoaded(bool isUserDataLoaded) {
-    this.isUserDataLoaded = isUserDataLoaded;
+  //employee data  getter and setter
+  List<PersonModel> _employeeDataList = [];
+  List<PersonModel> get employeeDataList => _employeeDataList;
+  set employeeDataList(List<PersonModel> value) {
+    _employeeDataList = value;
     notifyListeners();
   }
 
-  // void getUserData(List<dynamic> _) {
-  //   isUserDataLoaded = true;
-  //   compute<List<PersonModel>, List<dynamic>>(_apiService.getUserData, [])
-  //       .then((data) {
-  //     userDataList = data;
-  //     isUserDataLoaded = false;
-  //     notifyListeners();
-  //   });
-  // }
-
-  //employee data loading getter and setter
-  List<PersonModel> employeeDataList = [];
-  List<PersonModel> get getEmployeeDataList => employeeDataList;
-  set setEmployeeDataList(List<PersonModel> employeeDataList) {
-    this.employeeDataList = employeeDataList;
+  //family data  getter and setter
+  List<PersonModel> _familyDataList = [];
+  List<PersonModel> get familyDataList => _familyDataList;
+  set familyDataList(List<PersonModel> value) {
+    _familyDataList = value;
     notifyListeners();
   }
 
-  bool isEmployeeDataLoaded = false;
-  bool get getIsEmployeeDataLoaded => isEmployeeDataLoaded;
-  set setIsEmployeeDataLoaded(bool isEmployeeDataLoaded) {
-    this.isEmployeeDataLoaded = isEmployeeDataLoaded;
-    notifyListeners();
-  }
-
-  getEmployee() {
-    isEmployeeDataLoaded = true;
-    employeeDataList = ApiServices.getEmployeeData();
-    isEmployeeDataLoaded = false;
-    notifyListeners();
-  }
-
-  //family data loading getter and setter
-  List<PersonModel> familyDataList = [];
-  List<PersonModel> get getFamilyDataList => familyDataList;
-  set setFamilyDataList(List<PersonModel> familyDataList) {
-    this.familyDataList = familyDataList;
-    notifyListeners();
-  }
-
-  bool isFamilyDataLoaded = false;
-  bool get getIsFamilyDataLoaded => isFamilyDataLoaded;
-  set setIsFamilyDataLoaded(bool isFamilyDataLoaded) {
-    this.isFamilyDataLoaded = isFamilyDataLoaded;
-    notifyListeners();
-  }
-
-  getFamily() {
-    isFamilyDataLoaded = true;
-    familyDataList = ApiServices.getFamilyData();
-    isFamilyDataLoaded = false;
-    notifyListeners();
-  }
-
-  //relative data loading getter and setter
-  List<PersonModel> relativeDataList = [];
-  List<PersonModel> get getRelativeDataList => relativeDataList;
-  set setRelativeDataList(List<PersonModel> relativeDataList) {
-    this.relativeDataList = relativeDataList;
-    notifyListeners();
-  }
-
-  bool isRelativeDataLoaded = false;
-  bool get getIsRelativeDataLoaded => isRelativeDataLoaded;
-  set setIsRelativeDataLoaded(bool isRelativeDataLoaded) {
-    this.isRelativeDataLoaded = isRelativeDataLoaded;
-    notifyListeners();
-  }
-
-  getRelative() {
-    isRelativeDataLoaded = true;
-    relativeDataList = ApiServices.getRelativeData();
-    isRelativeDataLoaded = false;
+  //relative data  getter and setter
+  List<PersonModel> _relativeDataList = [];
+  List<PersonModel> get relativeDataList => _relativeDataList;
+  set relativeDataList(List<PersonModel> value) {
+    _relativeDataList = value;
     notifyListeners();
   }
 
   //student data loading getter and setter
-  List<PersonModel> studentDataList = [];
-  List<PersonModel> get getStudentDataList => studentDataList;
-
-  set setStudentDataList(List<PersonModel> studentDataList) {
-    this.studentDataList = studentDataList;
+  List<PersonModel> _studentDataList = [];
+  List<PersonModel> get studentDataList => _studentDataList;
+  set studentDataList(List<PersonModel> value) {
+    _studentDataList = value;
     notifyListeners();
   }
 
-  bool isStudentDataLoaded = false;
-  bool get getIsStudentDataLoaded => isStudentDataLoaded;
-  set setIsStudentDataLoaded(bool isStudentDataLoaded) {
-    this.isStudentDataLoaded = isStudentDataLoaded;
+  bool _isAllDataLoaded = false;
+  bool get isAllDataLoaded => _isAllDataLoaded;
+  set isAllDataLoaded(bool value) {
+    _isAllDataLoaded = value;
     notifyListeners();
   }
 
-  getStudent() {
-    isStudentDataLoaded = true;
-    studentDataList = ApiServices.getStudentData();
-    isStudentDataLoaded = false;
-    notifyListeners();
-  }
-
-  bool isAllDataLoaded = false;
-  bool get getIsAllDataLoaded => isAllDataLoaded;
-  set setIsAllDataLoaded(bool isAllDataLoaded) {
-    this.isAllDataLoaded = isAllDataLoaded;
-    notifyListeners();
-  }
-
-  Future<void> fetchAllData() async {
+  //fetch all data
+  fetchAllData() async {
     isAllDataLoaded = true;
-    ApiServices.getAllIsolatesData();
-
+    await _fetchAllData();
     isAllDataLoaded = false;
+    notifyListeners();
+  }
+
+  Future<void> _fetchAllData() async {
+    List messageData;
+    messageData = await _apiService.getAllIsolatesData();
+    userDataList = messageData[0];
+    employeeDataList = messageData[1];
+    familyDataList = messageData[2];
+    relativeDataList = messageData[3];
+    studentDataList = messageData[4];
   }
 }

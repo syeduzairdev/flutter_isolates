@@ -8,6 +8,7 @@ import 'package:isolates_demo/dummy_json/user_data_json.dart';
 import 'package:isolates_demo/models/person_model.dart';
 
 _getAllData(List<dynamic> _args) {
+  // ignore: no_leading_underscores_for_local_identifiers
   SendPort _sendPort = _args[0];
 
   final userData = ApiServices.getUserData();
@@ -60,13 +61,11 @@ class ApiServices {
     return personData;
   }
 
-  static getAllIsolatesData() async {
+  getAllIsolatesData() async {
+    // ignore: no_leading_underscores_for_local_identifiers
     ReceivePort _receivePort = ReceivePort();
     await Isolate.spawn(_getAllData, [_receivePort.sendPort]);
-    _receivePort.listen((message) {
-      print(message);
-    });
-    print(await _receivePort.first);
-    return await _receivePort.first;
+    List<dynamic> messageData = await _receivePort.first;
+    return messageData;
   }
 }
